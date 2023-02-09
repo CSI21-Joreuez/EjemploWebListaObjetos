@@ -8,7 +8,7 @@ public class Empleado {
 	
 	String apellidos;
 	
-	int nivel_acceso;
+	String nivel_acceso;
 	
 	public int getId_empleado() {
 		return id_empleado;
@@ -32,6 +32,13 @@ public class Empleado {
 		this.nombre = nombre;
 	}
 
+	public Empleado(String nombre, String apellidos, String nivel_acceso) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.nivel_acceso = nivel_acceso;
+	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -40,11 +47,11 @@ public class Empleado {
 		this.apellidos = apellidos;
 	}
 
-	public int getNivel_acceso() {
+	public String getNivel_acceso() {
 		return nivel_acceso;
 	}
 
-	public void setNivel_acceso(int nivel_acceso) {
+	public void setNivel_acceso(String nivel_acceso) {
 		this.nivel_acceso = nivel_acceso;
 	}
 

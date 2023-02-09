@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="/vistas/cabecera.jsp" %>
-   <c:redirect url="/segunda"/>
+  <c:redirect url="/segunda"/>
 <!DOCTYPE html>
 <html>
 <head>
