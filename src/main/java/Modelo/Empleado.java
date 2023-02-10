@@ -28,16 +28,21 @@ public class Empleado {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public Empleado(String nombre, String apellidos, String nivel_acceso) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.nivel_acceso = nivel_acceso;
 	}
+
+	public Empleado() {
+		super();
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 
 	public String getApellidos() {
 		return apellidos;

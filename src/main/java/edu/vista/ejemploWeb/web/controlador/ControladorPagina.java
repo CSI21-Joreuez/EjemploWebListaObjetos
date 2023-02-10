@@ -13,41 +13,47 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.cglib.core.Converter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import Modelo.Empleado;
 
 @Controller
 public class ControladorPagina {
 
+Map<String, Object> miModelo= new HashMap<String,Object>();
 protected final Log logger = LogFactory.getLog(getClass());
-public static final String RESULT_VIEW = "segunda";
+List<Empleado> listaEmpleado = new ArrayList<Empleado>();
+
 
 @RequestMapping(value="/segunda")
-	public ModelAndView gestionSolicitud( HttpServletRequest request) {
-
-	String nombre = request.getParameter("nombre");
-	String apellidos = request.getParameter("apellidos");
-	String nivel_acceso = request.getParameter("nivel_acceso");
-		
-	
-		
-		Map<String, Object> empl= new HashMap<String,Object>();
-		
+	public ModelAndView gestionSolicitud() {
+				
 		logger.info("Navegamos a la vista segunda");
-		Map<String, Object> miModelo= new HashMap<String,Object>();
-		List<Empleado> listaEmpleado = new ArrayList();
-		Empleado em = new Empleado(nombre, apellidos, nivel_acceso);
+		Empleado em = new Empleado("Juan Carlos","Orea","Alto");
 		listaEmpleado.add(em);
 		System.out.println(listaEmpleado.toString());
-		empl.put("empleados", listaEmpleado);
-		
 		miModelo.put("mensaje", "Todo Ok");
-		
-		return new ModelAndView("segunda","empl",empl);
+		miModelo.put("listaEmpleado", listaEmpleado);
+		return new ModelAndView("segunda","miModelo",miModelo);
 	}
-
+@RequestMapping(value="/guardar",method = RequestMethod.POST)
+	public ModelAndView guardar(@ModelAttribute("empl") Empleado empl) {
+		logger.info("Navegamos al guardar empleado");
+    	listaEmpleado.add(empl);  
+    	System.out.println(listaEmpleado.toString());
+        miModelo.put("listaEmpleado", listaEmpleado);
+    	return new ModelAndView("segunda", "miModelo", miModelo);
+	}
+    @RequestMapping(value="/navegacionFormulario")
+    public String navegacionFormulario(Model modelo) {
+        logger.info("Navegamos al formulario");
+        Empleado em = new Empleado();
+        modelo.addAttribute("empl", em);
+        return "formulario";
+    } 
 }
